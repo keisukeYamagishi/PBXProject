@@ -129,14 +129,6 @@ namespace xcodeproj {
                 
                 return file;
             }
-
-            // string Util::isHiphen(string file){
-
-            //     if(file.find("-") != string::npos)
-            //         return "\"" + file + "\"";
-                
-            //     return file;
-            // }
         }
     }
 }

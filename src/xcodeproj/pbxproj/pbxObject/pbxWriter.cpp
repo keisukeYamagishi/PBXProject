@@ -129,16 +129,16 @@ namespace xcodeproj {
             string pbxWriter::createBuildSection(vector<string> values){
                 
                 string overwirte;
-                for(auto itr = values.begin(); itr != values.end(); ++itr)
-                    overwirte += *itr;
+                for(auto BS = values.begin(); BS != values.end(); ++BS)
+                    overwirte += *BS;
                 
                 return overwirte;
             }
             
             string pbxWriter::createOverwriteValue(vector<string> values){
                 string overwirte;
-                for(auto itr = values.begin(); itr != values.end(); ++itr)
-                    overwirte += *itr + "\n";
+                for(auto OV = values.begin(); OV != values.end(); ++OV)
+                    overwirte += *OV + "\n";
                 return overwirte;
             }
         }

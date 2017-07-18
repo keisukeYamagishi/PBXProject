@@ -1,7 +1,7 @@
 # PBXObject
 
 [![](https://img.shields.io/badge/Language-C%2B%2B-ff69b4.svg)](https://isocpp.org/)
-[![](https://img.shields.io/badge/license-Apache-orange.svg)](https://github.com/keisukeYamagishi/PBXObject/blob/master/LICENSE)
+[![](https://img.shields.io/badge/license-Apache-orange.svg)](https://github.com/keisukeYamagishi/PBXProject/blob/master/LICENSE)
 [![](https://img.shields.io/badge/Twitter-O--Liker%20Error-blue.svg)](https://twitter.com/O_Linker_Error)
 
 # Build

@@ -23,7 +23,7 @@ mkdir gitrepo
 
 cd gitrepo
 
-git clone git@github.com:keisukeYamagishi/detect.git
+git cloen git@github.com:keisukeYamagishi/PBXProject.git
 
 ```
 
@@ -34,7 +34,7 @@ mkdir gitrepo
 
 cd gitrepo
 
-git clone https://github.com/keisukeYamagishi/detect.git
+git clone https://github.com/keisukeYamagishi/PBXProject.git
 
 ```
 

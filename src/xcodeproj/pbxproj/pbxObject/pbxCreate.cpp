@@ -20,6 +20,8 @@
 
 using namespace xcodeproj::pbxproj::pbxObject;
 
+#define XCASSETS_EXTENTION "xcassets"
+
 namespace xcodeproj {
     namespace pbxproj{
         namespace pbxObject {
@@ -84,7 +86,8 @@ namespace xcodeproj {
                     {"ttf","file;"},
                     {"xcodeproj","\"wrapper.pb-project\";"},
                     {"pl","text.script.perl;"},
-                    {"pm","text.script.perl;"}
+                    {"pm","text.script.perl;"},
+                    {"xcassets","folder.assetcatalog;"}
                 };
                 if(fileKnownType[ext]=="")return "text;";
                 return fileKnownType[ext];
@@ -164,7 +167,7 @@ namespace xcodeproj {
                 if(Util::pathExtention(path)=="framework"
                     || Util::pathExtention(path)=="bundle"
                     || Util::pathExtention(path)=="xcodeproj"
-                    || Util::pathExtention(path)=="xcassets"){
+                    || Util::pathExtention(path)==XCASSETS_EXTENTION){
                     return true;
                 }
                 return false;
@@ -220,7 +223,7 @@ namespace xcodeproj {
 
                             string buildUuid = pbxUUID::getInstance()->pbx_uuid_generater(lastPathComponent);
 
-                            if(Util::pathExtention(lastPathComponent)=="xcassets"){
+                            if(Util::pathExtention(lastPathComponent)==XCASSETS_EXTENTION){
                                 this->pbxResourcies.push_back(createPhase(buildUuid, lastPathComponent));
                                 this->pbxBuilds.push_back( pbxBuildObject::pbxBuildCreater(buildUuid, lastPathComponent, pbxChild.uuid));
                             }

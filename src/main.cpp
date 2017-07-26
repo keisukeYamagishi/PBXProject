@@ -49,7 +49,6 @@ int main(int argc, const char * argv[]) {
         cout << "PBXProject version: " << PBXPROJECT_VERSION << endl;
 
     }else if(op.option_s.addFile.size() != 0){
-        std::cout << "Hit" << std::endl;
         /*
          * Specify the path of the xcodeproj file you want to add.
          *

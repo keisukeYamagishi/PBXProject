@@ -57,6 +57,7 @@ namespace xcodeproj {
                 bool isBundleFile(string paht);
                 bool isLibFile(string path);
                 bool isHeaderFile(string path);
+                bool islprojFile(string path);
             };
 
             class pbxContainerItem {
@@ -72,6 +73,7 @@ namespace xcodeproj {
             class pbxReferenceObject{
             public:
                 static string pbxReferenceCreater(string uuid, string fileName);
+                static string pbxReferenceCreate(string uuid, string fileName,string name, string lastKnownFileType);
             };
             
             class pbxGroupObject{

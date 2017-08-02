@@ -1,3 +1,0 @@
-/Users/shichimi/Documents/PBXProject/CMakeFiles/rebuild_cache.dir
-/Users/shichimi/Documents/PBXProject/CMakeFiles/edit_cache.dir
-/Users/shichimi/Documents/PBXProject/CMakeFiles/PBXProject.dir

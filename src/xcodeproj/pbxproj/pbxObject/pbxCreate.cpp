@@ -38,6 +38,10 @@ namespace xcodeproj {
                 return "\t\t" + uuid + " /* " + fileName + " */ = {isa = PBXFileReference; " + pbxCreate::fileEncoding(fileName) + " lastKnownFileType = " + pbxCreate::filelastKnownFileType(fileName) + " path = " + Util::escapeCode(fileName) + "; sourceTree = \"<group>\"; };";
             }
             
+            string pbxReferenceObject::pbxReferenceCreate(string uuid, string fileName, string name, string lastKnownFileType){
+                 return "\t\t" + uuid + " /* " + fileName + " */ = {isa = PBXFileReference; " + pbxCreate::fileEncoding(fileName) + " lastKnownFileType = " + pbxCreate::filelastKnownFileType(lastKnownFileType) + " path = " + Util::escapeCode(name) + "; sourceTree = \"<group>\"; };";
+            }
+
             string pbxGroupObject::pbxGroupCreater(string uuid,string parent, vector<pbxChildren> chilren){
                 return "\t\t" + uuid + " /* " + parent + " */ = {\n\t\tisa = PBXGroup;\n\t\t\tchildren = (\n" + pbxCreate::listOfChildren(chilren) + "\t\t\t);\n\t\tpath = " + parent  + ";\n\t\tsourceTree = \"<group>\";\n\t\t};\n";
             }
@@ -190,8 +194,15 @@ namespace xcodeproj {
                 return false;
             }
 
+            bool pbxCreate::islprojFile(string path){
+                if (Util::pathExtention(path)=="lproj"){
+                    return true;
+                }
+                return false;
+            }
+
             vector<string> pbxCreate::pbxObjectCreater(string path){
-                
+
                 vector<string> results;
                 vector<string> dirs;
                 
@@ -205,8 +216,9 @@ namespace xcodeproj {
                 vector<string> lists = Util::listDirectory(path.c_str());
                 
                 if(lists.size()!=false){
+
                     for(auto itr=lists.begin(); itr != lists.end(); ++itr){
-                        
+
                         string full_path = *itr;
                         
                         string lastPathComponent = Util::lastPath(full_path);
@@ -216,9 +228,9 @@ namespace xcodeproj {
                         string uuid_s = pbxUUID::getInstance()->pbxGenerater(full_path);
                         
                         pbxChildren pbxChild = pbxies(uuid_s, lastPathComponent);
-                        
-                        groupChildren.push_back(pbxChild);
-                        
+                        if (islprojFile(lastPathComponent) == false)
+                            groupChildren.push_back(pbxChild);
+
                         if(Util::isDirectory(full_path.c_str())){
 
                             string buildUuid = pbxUUID::getInstance()->pbx_uuid_generater(lastPathComponent);
@@ -226,6 +238,29 @@ namespace xcodeproj {
                             if(Util::pathExtention(lastPathComponent)==XCASSETS_EXTENTION){
                                 this->pbxResourcies.push_back(createPhase(buildUuid, lastPathComponent));
                                 this->pbxBuilds.push_back( pbxBuildObject::pbxBuildCreater(buildUuid, lastPathComponent, pbxChild.uuid));
+                            }
+
+                            if(islprojFile(lastPathComponent)){
+
+                                vector<string> lprojs = Util::listDirectory(full_path.c_str());
+
+                                for (auto lpj = lprojs.begin(); lpj != lprojs.end(); ++lpj){
+
+                                    string lprojPath = *lpj;
+                                    string storyboardName = Util::lastPath(lprojPath);
+
+                                    string parentlproj = Util::removeExtention(lastPathComponent);
+                                    std::cout << parentlproj << std::endl;
+                                    lprojPath = lastPathComponent + "/" + storyboardName;
+
+                                    string uuidLproj = pbxUUID::getInstance()->pbxGenerater(lprojPath);
+
+                                    pbxChildren lprojPbx = pbxies(uuidLproj, Util::lastPath(storyboardName));
+                        
+                                    groupChildren.push_back(lprojPbx);
+
+                                    this->pbxReferencies.push_back( pbxReferenceObject::pbxReferenceCreate(lprojPbx.uuid,parentlproj,lprojPath,lprojPbx.filename));
+                                }
                             }
 
                             if(isBundleFile(lastPathComponent))
@@ -243,6 +278,7 @@ namespace xcodeproj {
                                 dirs.push_back(full_path);
                             
                         }else{
+
                             pbxReferencies.push_back( pbxReferenceObject::pbxReferenceCreater(pbxChild.uuid, pbxChild.filename));
                             
                             string buildUuid = pbxUUID::getInstance()->pbx_uuid_generater(lastPathComponent);
@@ -262,7 +298,9 @@ namespace xcodeproj {
                         }
                     }
                     //PBX Group Create;
-                    this->pbxGroups.push_back( pbxGroupObject::pbxGroupCreater(parentUuid, parentFile, groupChildren));
+                    if (islprojFile(parentFile) == false)
+                        this->pbxGroups.push_back( pbxGroupObject::pbxGroupCreater(parentUuid, parentFile, groupChildren));
+                    
                     
                     for(auto itr = dirs.begin(); itr != dirs.end(); ++itr){
                         string dir_path = *itr;

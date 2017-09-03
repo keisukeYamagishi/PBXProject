@@ -129,6 +129,12 @@ namespace xcodeproj {
                 
                 return file;
             }
+
+            string replaceCharacter(string base, string replace){
+                string str(base);
+                str.replace(0,base.size(), replace);
+                return str;
+            }
         }
     }
 }

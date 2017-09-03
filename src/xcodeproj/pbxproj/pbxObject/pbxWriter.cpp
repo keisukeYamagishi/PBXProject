@@ -33,6 +33,7 @@ namespace xcodeproj {
                 this->isPbxGroup = false;
                 this->isMainGroup = false;
                 this->isOutPut = false;
+                this->isVariant = false;
                 this->writerPath = path;
             }
             
@@ -116,6 +117,17 @@ namespace xcodeproj {
                             buf = buf + "\n" + createBuildSection(pbx.pbxFrameworks);
                         }
                     }
+
+                    if (EndPBXProjectSection==buf
+                        || this->isVariant == true){
+
+                        this->isVariant = true;
+
+                        buf = buf + "\n" + BeginPBXVariantGroupSection + "\n";
+                        buf = buf + createOverwriteValue(pbx.pbxVariants) + "\n" + EndPBXVariantGroupSection + "\n\n";
+                        this->isVariant = false;
+                    }
+
                     pbxproj = pbxproj + buf + "\n";
                 }
                 if(this->isOutPut==true)

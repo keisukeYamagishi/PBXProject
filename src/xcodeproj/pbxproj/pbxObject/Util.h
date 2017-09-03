@@ -118,6 +118,8 @@ namespace xcodeproj {
                 static string removeExtention(string fileName);
 
                 static string escapeCode(string file);
+
+                static string replaceCharacter(string base, string replace);
             };
         }
     }

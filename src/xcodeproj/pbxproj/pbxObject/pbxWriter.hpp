@@ -34,6 +34,7 @@ namespace xcodeproj {
                 string parentGroup;
                 
             private:
+                bool isVariant;
                 bool isSource;
                 bool isResource;
                 bool isFramework;

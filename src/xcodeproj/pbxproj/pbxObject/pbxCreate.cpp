@@ -323,7 +323,11 @@ namespace xcodeproj {
 
                             string buildUuid = pbxUUID::getInstance()->pbx_uuid_generater(lastPathComponent);
 
-                            if (isXibfile(lastPathComponent)==true){
+                            pbxChildren lprojChild = this->lprojMap[full_path];
+
+                            if (lprojChild.uuid != ""){
+                              std::cout << "HIT storyboard : -> " << full_path << "\n";
+                            //if (isXibfile(lastPathComponent)==true){
 
                             //  for (auto r = this->lprojMap.begin(); r != this->lprojMap.end(); r++){
                             //    pbxChildren chi = r->second;
@@ -331,7 +335,7 @@ namespace xcodeproj {
                             //     std::cout << "file in:::  value == >> " << chi.uuid << "\n";
                             //  }
 
-                              pbxChildren lprojChild = this->lprojMap[full_path];
+                              //pbxChildren lprojChild = this->lprojMap[full_path];
                               //std::cout << "chk assing lprojpath in :: " << lprojChild.uuid << std::endl;
                               this->pbxBuilds.push_back( pbxBuildObject::pbxBuildCreater(buildUuid, lastPathComponent, lprojChild.uuid));
                               this->pbxResourcies.push_back(createPhase(buildUuid, lastPathComponent));

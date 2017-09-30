@@ -2,5 +2,7 @@ language: cpp
 compiler:
   - clang
   - gcc
-os:  osx
+os:  
+  - osx
+  - linux
 script: cmake . && make

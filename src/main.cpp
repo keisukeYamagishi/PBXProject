@@ -18,7 +18,7 @@
 using namespace xcodeproj::pbxproj::pbxObject;
 using namespace std;
 
-#define PBXPROJECT_VERSION "1.0.4"
+#define PBXPROJECT_VERSION "2.0.0"
 
 int main(int argc, const char * argv[]) {
 

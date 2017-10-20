@@ -42,6 +42,7 @@ namespace xcodeproj {
                 bool isMainGroup;
                 const char* writerPath;
                 string createBuildSection(vector<string>);
+                string CreateBuildPhase(vector<string>);
                 string createOverwriteValue(vector<string> values);
             };
         }

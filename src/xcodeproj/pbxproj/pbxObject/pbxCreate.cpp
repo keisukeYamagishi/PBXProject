@@ -159,11 +159,11 @@ namespace xcodeproj {
             }
 
             string pbxCreate::createPhase(string uuid, string file){
-                return "\t\t\t\t" + uuid + " /* "  + file + " in " + pbxCreate::fileType(file) + " */,\n";
+                return "\t\t\t\t" + uuid + " /* "  + file + " in " + pbxCreate::fileType(file) + " */,";
             }
 
             string pbxCreate::createPbxies(string uuid, string file){
-                return "\t\t\t\t" + uuid + " /* "  + file + " */,\n";
+                return "\t\t\t\t" + uuid + " /* "  + file + " */,";
             }
 
             bool pbxCreate::isSourceFile(string path){
@@ -241,15 +241,13 @@ namespace xcodeproj {
                         string full_path = *itr;
 
                         string lastPathComponent = Util::lastPath(full_path);
-
-                        if(lastPathComponent.find(".DS_Store")==false)continue;
+                        if(lastPathComponent.find(".DS_Store")==false
+                           || lastPathComponent.find(".git")==false)continue;
 
                         string uuid_s = pbxUUID::getInstance()->pbxGenerater(full_path);
 
                         pbxChildren pbxChild = pbxies(uuid_s, lastPathComponent);
                         if (islprojFile(lastPathComponent) == false){
-                          //std::cout << "Directory : " << lastPathComponent << std::endl;
-
                               groupChildren.push_back(pbxChild);
                         }
 
@@ -273,7 +271,6 @@ namespace xcodeproj {
                                     string storyboardName = Util::lastPath(lprojPath);
 
                                     string parentlproj = Util::removeExtention(lastPathComponent);
-                                    //std::cout << "in :: lproj path: => " << lprojPath << std::endl;
                                     lprojPath = lastPathComponent + "/" + storyboardName;
                                     string lProjFileName = Util::lastPath(full_path.c_str());
                                     string lprojUUID = pbxUUID::getInstance()->pbxGenerater(lprojKey);
@@ -286,7 +283,7 @@ namespace xcodeproj {
 
                                     this->pbxReferencies.push_back( pbxReferenceObject::pbxReferenceCreate(lprojUUID,parentlproj,lprojPath,lprojPbx.filename));
 
-                                    //pbxVarient lprojDto = pbxVarient()
+                                    string refe = pbxReferenceObject::pbxReferenceCreate(lprojUUID,parentlproj,lprojPath,lprojPbx.filename);
 
                                     this->pbxVariants.push_back( pbxVariantGroupSection::pbxVariantGroupSectionCreate(lprojPbx.uuid,
                                                                                                                       lprojUUID,
@@ -295,12 +292,6 @@ namespace xcodeproj {
                                                                                                                     ));
 
                                 }
-
-                                // for (auto i = this->lprojMap.begin(); i != this->lprojMap.end(); i++){
-                                //   pbxChildren chi = i->second;
-                                //    std::cout << "file in::: key ==>> " << i->first << "\n";
-                                //    std::cout << "file in:::  value == >> " << chi.uuid << "\n";
-                                // }
                             }
 
                             if(isBundleFile(lastPathComponent))
@@ -326,17 +317,6 @@ namespace xcodeproj {
                             pbxChildren lprojChild = this->lprojMap[full_path];
 
                             if (lprojChild.uuid != ""){
-                              std::cout << "HIT storyboard : -> " << full_path << "\n";
-                            //if (isXibfile(lastPathComponent)==true){
-
-                            //  for (auto r = this->lprojMap.begin(); r != this->lprojMap.end(); r++){
-                            //    pbxChildren chi = r->second;
-                            //     std::cout << "file in:::BUILDddd key ==>> " << r->first << "\n";
-                            //     std::cout << "file in:::  value == >> " << chi.uuid << "\n";
-                            //  }
-
-                              //pbxChildren lprojChild = this->lprojMap[full_path];
-                              //std::cout << "chk assing lprojpath in :: " << lprojChild.uuid << std::endl;
                               this->pbxBuilds.push_back( pbxBuildObject::pbxBuildCreater(buildUuid, lastPathComponent, lprojChild.uuid));
                               this->pbxResourcies.push_back(createPhase(buildUuid, lastPathComponent));
                             }else{
@@ -358,7 +338,6 @@ namespace xcodeproj {
                     //PBX Group Create;
                     if (islprojFile(parentFile) == false)
                         this->pbxGroups.push_back( pbxGroupObject::pbxGroupCreater(parentUuid, parentFile, groupChildren));
-
 
                     for(auto itr = dirs.begin(); itr != dirs.end(); ++itr){
                         string dir_path = *itr;

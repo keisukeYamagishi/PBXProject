@@ -92,7 +92,7 @@ namespace xcodeproj {
                         
                         if(buf.find(PBX_FILES_STRING) != string::npos){
                             this->isSource = false;
-                            buf = buf + "\n" +  createBuildSection(pbx.pbxSourcies);
+                            buf = buf + "\n" + CreateBuildPhase(pbx.pbxSourcies);
                         }
                     }
                     
@@ -103,7 +103,7 @@ namespace xcodeproj {
                         
                         if(buf.find(PBX_FILES_STRING) != string::npos){
                             this->isResource = false;
-                            buf = buf + "\n" + createBuildSection(pbx.pbxResourcies);
+                            buf = buf + "\n" + CreateBuildPhase(pbx.pbxResourcies);
                         }
                     }
                     
@@ -114,7 +114,7 @@ namespace xcodeproj {
                         
                         if(buf.find(PBX_FILES_STRING) != string::npos){
                             this->isFramework = false;
-                            buf = buf + "\n" + createBuildSection(pbx.pbxFrameworks);
+                            buf = buf + "\n" + CreateBuildPhase(pbx.pbxFrameworks);
                         }
                     }
 
@@ -132,21 +132,33 @@ namespace xcodeproj {
                 }
                 if(this->isOutPut==true)
                     cout << pbxproj << endl;
-                
+
                 ofstream outputfile(this->writerPath);
                 outputfile<<pbxproj;
                 outputfile.close();
             }
-            
+
             string pbxWriter::createBuildSection(vector<string> values){
-                
+
                 string overwirte;
                 for(auto BS = values.begin(); BS != values.end(); ++BS)
                     overwirte += *BS;
-                
+
                 return overwirte;
             }
-            
+
+            string pbxWriter::CreateBuildPhase(vector<string> values) {
+                string overwirte;
+                for(int bs = 0; bs < values.size(); ++bs){
+                    string writeValue = values[bs];//*BS;
+                    if (bs >= (values.size()-1))
+                        overwirte = overwirte + writeValue;
+                    else
+                        overwirte = overwirte + writeValue + "\n";
+                }
+                return overwirte;
+            }
+
             string pbxWriter::createOverwriteValue(vector<string> values){
                 string overwirte;
                 for(auto OV = values.begin(); OV != values.end(); ++OV)

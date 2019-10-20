@@ -124,7 +124,8 @@ namespace xcodeproj {
 
             string Util::escapeCode(string file){
                 if(file.find("-") != string::npos
-                    || file.find(" ") != string::npos)
+                    || file.find(" ") != string::npos
+                    || file.find("+") != string::npos)
                     return "\"" + file + "\"";
                 
                 return file;

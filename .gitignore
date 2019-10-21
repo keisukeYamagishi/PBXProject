@@ -36,3 +36,6 @@ CMakeFiles/*
 *.cmake
 MakeFile
 CMakeCache.txt
+
+## Config
+_config.yml

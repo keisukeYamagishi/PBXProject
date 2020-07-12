@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/badge/Language-C%2B%2B-ff69b4.svg)](https://isocpp.org/)
 [![](https://img.shields.io/badge/license-Apache-orange.svg)](https://github.com/keisukeYamagishi/PBXProject/blob/master/LICENSE)
-[![](https://img.shields.io/badge/Twitter-O--Liker%20Error-blue.svg)](https://twitter.com/O_Linker_Error)
+[![](https://img.shields.io/badge/twitter-brew__0-fc3158)](https://twitter.com/brew_0)
 
 # Build
 |OS		 |Result	   |

@@ -9,6 +9,7 @@
 #include "Util.h"
 #include <iostream>
 #include <sstream>
+#include <regex>
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
@@ -123,11 +124,12 @@ namespace xcodeproj {
             }
 
             string Util::escapeCode(string file){
-                if(file.find("-") != string::npos
-                    || file.find(" ") != string::npos
-                    || file.find("+") != string::npos)
+                std::smatch match;
+                if(std::regex_search(file, match, regex("[!\"+-@><~$%&?#\'*/ ^(:_;){}¥|`=[\\]]"))){
                     return "\"" + file + "\"";
-                
+                }else if (file.find("") != string::npos){
+                    return "\"" + file + "\"";
+                }
                 return file;
             }
 

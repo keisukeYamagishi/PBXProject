@@ -44,7 +44,7 @@ namespace xcodeproj {
             }
 
             string pbxGroupObject::pbxGroupCreater(string uuid,string parent, vector<pbxChildren> chilren){
-                return "\t\t" + uuid + " /* " + parent + " */ = {\n\t\tisa = PBXGroup;\n\t\t\tchildren = (\n" + pbxCreate::listOfChildren(chilren) + "\t\t\t);\n\t\tpath = " + parent  + ";\n\t\tsourceTree = \"<group>\";\n\t\t};\n";
+                return "\t\t" + uuid + " /* " + parent + " */ = {\n\t\tisa = PBXGroup;\n\t\t\tchildren = (\n" + pbxCreate::listOfChildren(chilren) + "\t\t\t);\n\t\tpath = " + Util::escapeCode(parent) + ";\n\t\tsourceTree = \"<group>\";\n\t\t};\n";
             }
 
             string pbxVariantGroupSection::pbxVariantGroupSectionCreate(string uuid, string lprojUuid, string fileName, string lprojName){

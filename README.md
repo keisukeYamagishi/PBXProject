@@ -90,7 +90,7 @@ option:
 -a:  add File or directory
 
 
-Regars !
+Best Regars !
 
 ```
 

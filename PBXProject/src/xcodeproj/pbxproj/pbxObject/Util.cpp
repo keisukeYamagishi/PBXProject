@@ -125,7 +125,9 @@ namespace xcodeproj {
 
             string Util::escapeCode(string file){
                 std::smatch match;
-                if(std::regex_search(file, match, regex("[!\"+-@><~$%&?#\'*/ ^(:_;){}¥|`=[\\]]"))){
+                if (file.find("\"") != string::npos){
+                    return file + "\"";
+                }else if(std::regex_search(file, match, regex("[!+-@><~$%&?#\'*/ ^(:_;){}¥|`=[\\].]"))){
                     return "\"" + file + "\"";
                 }else if (file.find("") != string::npos){
                     return "\"" + file + "\"";

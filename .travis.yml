@@ -3,4 +3,4 @@ compiler:
   - clang
   - gcc
 os:   osx
-script: cmake . && make
+script: cd PBXProject && cmake . && make

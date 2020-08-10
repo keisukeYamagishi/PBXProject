@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
         cout << "\n";
         cout << "***************************************************" << endl;
         cout << "\n";
-        cout << "Regars !" << endl;
+        cout << "Best Regars !" << endl;
         cout << "\n";
     }else if(op.option_s.version == OPTION_VERSION){
 

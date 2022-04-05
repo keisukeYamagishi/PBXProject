@@ -17,3 +17,5 @@ jobs:
       run: cd PBXProject && cmake .
     - name: make
       run: cd PBXProject && make
+    - name: execute pbxproj
+      run: cd PBXProject && ./pbxobj

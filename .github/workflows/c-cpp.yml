@@ -13,15 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: pwd
-      run: pwd
-    - name: cmake which
-      run: which cmake
-    - name: ls
-      run: ls -a
     - name: configure
       run: cd PBXProject && cmake .
-    - name: confirm
-      run: ls -a
     - name: make
-      run: make
+      run: cd PBXProject && make

@@ -9,15 +9,13 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: configure
-      run: cmake .
+      run: cd PBXProject && cmake .
     - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      run: cd PBXProject && make
+    - name: execute pbxproj
+      run: cd PBXProject && ./pbxobj

@@ -13,8 +13,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: configure
-      run: pwd && ls -a
+    - name: pwd
+      run: pwd
+    - name: cmake which
+      run: which cmake
+    - name: ls
+      run: ls -a
     - name: make
       run: make
     - name: make check

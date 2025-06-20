@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.15)
 add_definitions("-Wall -std=c++0x")
 project(pbxobj CXX)
 set("1.0.0")

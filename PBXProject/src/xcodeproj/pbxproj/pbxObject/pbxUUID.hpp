@@ -34,6 +34,7 @@ namespace xcodeproj {
                 string pbxGenerater(string path);
             private:
                 bool containObject(vector<string> uuids, string contain);
+                string pbx_uuid_string();
             };
         }
     }

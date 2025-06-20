@@ -6,7 +6,7 @@
 # Build
 |OS		 |Result	   |
 |:---------------|:----------------|
-| ***mac OS X*** |[![Build Status](https://travis-ci.org/keisukeYamagishi/PBXProject.svg?branch=master)](https://travis-ci.org/keisukeYamagishi/PBXProject)|
+| ***mac OS X*** |[![C/C++ CI](https://github.com/keisukeYamagishi/PBXProject/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/keisukeYamagishi/PBXProject/actions/workflows/c-cpp.yml)|
 
 # Overview
 

@@ -13,6 +13,11 @@
 #include "pbxUUID.hpp"
 #include <iostream>
 #include <random>
+#include <sstream>
+#include <iomanip>
+
+
+using namespace xcodeproj::pbxproj::pbxObject;
 
 namespace xcodeproj {
     namespace pbxproj{
@@ -44,28 +49,21 @@ namespace xcodeproj {
             }
             
             string pbxUUID::pbx_uuid_generater(string uuid){
-                
-                std::string pbxuuid ="";
-                
-                while (pbxUUID::containObject(pbxUUID::getInstance()->uuidStore, pbxuuid)==false) {
-                    std::random_device rnd;
-                    std::mt19937 mt(rnd());
-                    std::uniform_int_distribution<int> rand5(0,15);
-                    
-                    for (int i = 0; i < 24; i++)
-                        pbxuuid +=  pbxUUID::pbx_uuid_string(rand5(mt));
-                    
-                    pbxUUID::getInstance()->uuidStore.push_back(pbxuuid);
-                }
-                return pbxuuid;
+                return pbx_uuid_string();
             }
-            
-            
-            string pbxUUID::pbx_uuid_string(int index){
-                string  uuidCharacter[16] = {
-                    "0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"
-                };
-                return uuidCharacter[index];
+
+            string pbxUUID::pbx_uuid_string() {
+                random_device rd;
+                mt19937_64 gen(rd());
+                
+                stringstream ss;
+                for (int i = 0; i < 12; ++i) {
+                    uint8_t byte = static_cast<uint8_t>(gen() & 0xFF);
+                    ss << hex << setw(2) << setfill('0') << (int)byte;
+                }
+                string id = ss.str();
+                transform(id.begin(), id.end(), id.begin(), ::toupper);
+                return id;
             }
             
             bool pbxUUID::containObject(vector<string> uuids, string contain){
